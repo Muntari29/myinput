@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+main {
+  width: 600px;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #2b2b2b;
+}
+
+.header {
+  color: #eee;
+  padding: 8px;
+  margin: 0;
+  font-size: 32px;
+}
