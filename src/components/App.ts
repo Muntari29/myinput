@@ -3,7 +3,9 @@ import Header from './Header.js';
 import TextInput from './TextInput.js';
 import { IState } from '../utils/interfaces/common.js';
 import ResultList from './ResultList.js';
-import { getItem } from '../utils/Storage.js';
+import Storage from '../utils/Storage.js';
+import { request } from '../api/index.js';
+import Debounce from '../utils/Debounce.js';
 
 // element 새로 생성하지 않기에 extends 삭제하였음.
 class App {
@@ -17,7 +19,7 @@ class App {
     movieList: [],
     isInputFocus: false,
   };
-  cache = getItem('movie', {});
+  cache = Storage.getItem('movie', {});
 
   constructor() {
     // super();
@@ -26,9 +28,13 @@ class App {
     this.Header = new Header();
     this.TextInput = new TextInput({
       inputValue: this.state.inputValue,
-      onChange: (text: string) => {
-        console.log(555555, text);
-      },
+      onChange: Debounce(async (text: string) => {
+        const res = await request(text);
+        if (res.length !== 0) {
+          this.cache[text] = res;
+          Storage.setItem('movie', this.cache);
+        }
+      }, 800),
       onFocus: () => {
         this.state.isInputFocus = true;
         this.ResultList.setIsInputFocusTrue();
@@ -39,10 +45,7 @@ class App {
       },
     });
     this.ResultList = new ResultList({
-      movieList: [
-        { id: 1, text: 'name' },
-        { id: 2, text: 'name2' },
-      ],
+      movieList: this.state.movieList,
       isInputFocus: this.state.isInputFocus,
     });
   }

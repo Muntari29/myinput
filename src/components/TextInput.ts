@@ -17,8 +17,6 @@ class TextInput extends Component {
     const inputValue = (e.target as HTMLInputElement).value;
     this.setValue(inputValue);
     this.onChange(inputValue);
-    const res = await request(inputValue);
-    console.log(res);
   };
 
   onClickXbtn = () => {
