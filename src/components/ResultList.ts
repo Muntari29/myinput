@@ -1,44 +1,41 @@
-import { IItem, IResultList } from '../utils/interfaces/common.js';
-import Component from './Component.js';
+import { IResultList, IResultListState } from '../utils/interfaces/common.js';
 
-class ResultList extends Component {
-  readonly element: Element;
-  moviList: IItem[];
-  isInputFocus: boolean;
+export default class ResultList {
+  $target: Element;
+  $element: HTMLDivElement;
+  state: IResultListState;
 
-  constructor({ movieList, isInputFocus }: IResultList) {
+  constructor({ $target, initialState }: IResultList) {
     console.log('ResList');
-    super();
-    this.isInputFocus = isInputFocus;
-    this.moviList = movieList;
-    this.element = document.createElement('div');
-    this.element.className = 'result-list';
+    this.$target = $target;
+    this.$element = document.createElement('div');
+    this.$element.className = 'result-list';
+    this.state = initialState;
+    this.render();
   }
 
-  setIsInputFocusTrue = () => {
-    this.isInputFocus = true;
-    this.showList();
+  setState = (nextState: IResultListState) => {
+    this.state = nextState;
+    console.log('here', this.state, nextState);
+    this.render();
   };
 
-  setIsInputFocusFalse = () => {
-    this.isInputFocus = false;
-    this.closedList();
-  };
-
-  showList() {
-    this.element.innerHTML = `<ul class="list--ul" >
-        ${this.moviList
-          .map(
-            (item) =>
-              `<li id="${item.id}" class="list--li">${item.text}${item.id}</li>`
-          )
-          .join('')}
-      </ul>`;
+  template() {
+    return `<ul class="list--ul" >
+    ${this.state.movieList
+      .map(
+        (item) =>
+          `<li id="${item.id}" class="list--li">${item.text}${item.id}</li>`
+      )
+      .join('')}
+  </ul>`;
   }
 
-  closedList() {
-    this.element.innerHTML = '';
+  render() {
+    if (this.state.isInputFocus) {
+      this.$element.innerHTML = this.template();
+    }
+    this.$element.style.display = this.state.isInputFocus ? 'block' : 'none';
+    this.$target.appendChild(this.$element);
   }
 }
-
-export default ResultList;

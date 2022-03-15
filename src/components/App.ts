@@ -1,61 +1,77 @@
-import Component from './Component.js';
-import Header from './Header.js';
-import TextInput from './TextInput.js';
-import { IState } from '../utils/interfaces/common.js';
-import ResultList from './ResultList.js';
-import Storage from '../utils/Storage.js';
 import { request } from '../api/index.js';
 import Debounce from '../utils/Debounce.js';
+import { IState } from '../utils/interfaces/common.js';
+import Header from './Header.js';
+import ResultList from './ResultList.js';
+import TextInput from './TextInput.js';
 
-// element 새로 생성하지 않기에 extends 삭제하였음.
-class App {
-  // readonly element: HTMLElement;
-  public Header: Header;
-  public TextInput: TextInput;
-  public ResultList: ResultList;
-  // public Result: Result;
+export default class App {
+  $target: Element;
+  textInput: TextInput;
+  resultList: ResultList;
   state: IState = {
     inputValue: '',
     movieList: [],
     isInputFocus: false,
   };
-  cache = Storage.getItem('movie', {});
 
-  constructor() {
-    // super();
-    // this.element = document.createElement('a');
-    console.log('App');
-    this.Header = new Header();
-    this.TextInput = new TextInput({
-      inputValue: this.state.inputValue,
-      onChange: Debounce(async (text: string) => {
-        const res = await request(text);
-        if (res.length !== 0) {
-          this.cache[text] = res;
-          Storage.setItem('movie', this.cache);
-        }
+  constructor({ $target }: any) {
+    this.$target = $target;
+    new Header({ $target });
+    //
+    this.textInput = new TextInput({
+      $target,
+      initialState: this.state.inputValue,
+      onChange: Debounce(async (movieTitle: string) => {
+        const movieData = await request(movieTitle);
+        this.setState({
+          ...this.state,
+          movieList: movieData,
+        });
       }, 800),
       onFocus: () => {
-        this.state.isInputFocus = true;
-        this.ResultList.setIsInputFocusTrue();
+        console.log('focus');
+        this.setState({
+          ...this.state,
+          isInputFocus: true,
+        });
       },
       onBlur: () => {
-        this.state.isInputFocus = false;
-        this.ResultList.setIsInputFocusFalse();
+        console.log('blur');
+        this.setState({
+          ...this.state,
+          isInputFocus: false,
+        });
       },
     });
-    this.ResultList = new ResultList({
+    //
+    this.resultList = new ResultList({
+      $target,
+      initialState: {
+        movieList: this.state.movieList,
+        isInputFocus: this.state.isInputFocus,
+      },
+    });
+  }
+
+  setState(nextState: any) {
+    console.log('app setState', nextState);
+    this.state = nextState;
+    this.resultList.setState({
       movieList: this.state.movieList,
       isInputFocus: this.state.isInputFocus,
     });
+    // this.render();
   }
 
-  render(parent: Element) {
-    // super.render(parent);
-    this.Header.render(parent);
-    this.TextInput.render(parent);
-    this.ResultList.render(parent);
+  template() {
+    return `
+        <div></div>
+    `;
+  }
+
+  render() {
+    // this.$target.innerHTML = this.template();
+    this.setState('테스트');
   }
 }
-
-export default App;

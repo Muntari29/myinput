@@ -1,12 +1,16 @@
-import Component from './Component.js';
-class Header extends Component {
-  readonly element: HTMLElement;
+class Header {
+  $target: Element;
+  constructor({ $target }: any) {
+    this.$target = $target;
+    this.render();
+  }
 
-  constructor() {
-    super();
-    this.element = document.createElement('h1');
-    this.element.className = 'header';
-    this.element.textContent = 'autocomplete Input';
+  template() {
+    return `<header class="header">autocomplete Input</header>`;
+  }
+
+  render() {
+    this.$target.innerHTML = this.template();
   }
 }
 

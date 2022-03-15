@@ -22,7 +22,7 @@ main {
 
 /* input Text Form Style */
 
-.input-text {
+.input--form {
   display: flex;
   justify-content: center;
   margin-bottom: 32px;
