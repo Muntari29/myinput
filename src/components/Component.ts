@@ -5,6 +5,7 @@ export default abstract class Component {
     if (parent instanceof Component) {
       parent.element.appendChild(this.element);
     } else {
+      console.log('durl');
       parent.appendChild(this.element);
     }
   }
