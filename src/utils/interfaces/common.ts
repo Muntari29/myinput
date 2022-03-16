@@ -18,6 +18,7 @@ export interface ITextInput extends ITarget {
   onChange: (text: string) => void;
   onFocus: () => void;
   onBlur: () => void;
+  onBtnClick: () => void;
 }
 
 export interface IResultListState {

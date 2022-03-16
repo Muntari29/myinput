@@ -26,6 +26,7 @@ export default class App {
       $target,
       initialState: this.state.inputValue,
       onChange: Debounce(async (movieTitle: string) => {
+        console.log('start', movieTitle);
         if (movieTitle.length > 0) {
           let movieData: string | null = null;
           if (this.cache[movieTitle]) {
@@ -37,7 +38,14 @@ export default class App {
           }
           this.setState({
             ...this.state,
+            inputValue: movieTitle,
             movieList: movieData,
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            inputValue: movieTitle,
+            movieList: [],
           });
         }
       }, 500),
@@ -55,6 +63,13 @@ export default class App {
           isInputFocus: false,
         });
       },
+      onBtnClick: () => {
+        this.setState({
+          ...this.state,
+          inputValue: '',
+          movieList: [],
+        });
+      },
     });
     //
     this.resultList = new ResultList({
@@ -67,23 +82,23 @@ export default class App {
   }
 
   setState(nextState: any) {
-    console.log('app setState', nextState);
     this.state = nextState;
+    console.log('set:', this.state);
+    this.textInput.setState(this.state.inputValue);
     this.resultList.setState({
       movieList: this.state.movieList,
       isInputFocus: this.state.isInputFocus,
     });
-    // this.render();
   }
 
-  template() {
-    return `
-        <div></div>
-    `;
-  }
+  // template() {
+  //   return `
+  //       <div></div>
+  //   `;
+  // }
 
-  render() {
-    // this.$target.innerHTML = this.template();
-    this.setState('테스트');
-  }
+  // render() {
+  //   // this.$target.innerHTML = this.template();
+  //   this.setState('테스트');
+  // }
 }
