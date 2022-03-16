@@ -72,7 +72,7 @@ main {
 
 /* ResultList Style */
 
-.result-list {
+.result--list {
   width: 400px;
   background-color: #909090;
   margin: 0 auto;
@@ -99,5 +99,5 @@ main {
 }
 
 .list--li.active {
-  background-color: beige;
+  background-color: #c1c1c1;
 }

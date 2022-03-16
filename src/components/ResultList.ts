@@ -13,10 +13,9 @@ export default class ResultList {
     onKeyDownArrowUp,
     onKeyDownArrowDown,
   }: IResultList) {
-    console.log('ResList');
     this.$target = $target;
     this.$element = document.createElement('div');
-    this.$element.className = 'result-list';
+    this.$element.className = 'result--list';
     this.state = initialState;
     this.onKeyDownArrowUp = onKeyDownArrowUp;
     this.onKeyDownArrowDown = onKeyDownArrowDown;
@@ -25,7 +24,6 @@ export default class ResultList {
 
   setState = (nextState: IResultListState) => {
     this.state = nextState;
-    console.log('here', this.state.selectedId);
     this.render();
   };
 
@@ -44,7 +42,6 @@ export default class ResultList {
   }
 
   render() {
-    console.log('render');
     const { movieList, isInputFocus } = this.state;
     this.$element.style.display = movieList.length > 0 ? 'block' : 'none';
     if (isInputFocus) {
@@ -60,11 +57,9 @@ export default class ResultList {
     const { selectedId } = this.state;
     if (!e.isComposing) {
       if (e.key === 'ArrowUp') {
-        console.log('arrowup');
         const nextId = selectedId - 1;
         this.onKeyDownArrowUp(nextId);
       } else if (e.key === 'ArrowDown') {
-        console.log('ArrowDown');
         const nextId = selectedId + 1;
         this.onKeyDownArrowDown(nextId);
       }
@@ -73,7 +68,6 @@ export default class ResultList {
 
   mounte() {
     const { movieList, isInputFocus } = this.state;
-    console.log('mount');
     window.removeEventListener('keydown', this.handleKeydown);
     if (movieList.length > 0 && isInputFocus) {
       window.addEventListener('keydown', this.handleKeydown);

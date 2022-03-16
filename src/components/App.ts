@@ -78,14 +78,12 @@ export default class App {
         selectedId: this.state.selectedId,
       },
       onKeyDownArrowUp: (nextId: number) => {
-        console.log('onKeyDownArrowUp');
         this.setState({
           ...this.state,
           selectedId: nextId < 0 ? this.state.movieList.length : nextId,
         });
       },
       onKeyDownArrowDown: (nextId: number) => {
-        console.log('onKeyDownArrowDown');
         this.setState({
           ...this.state,
           selectedId: nextId < this.state.movieList.length + 1 ? nextId : 0,
@@ -96,7 +94,6 @@ export default class App {
 
   setState(nextState: any) {
     this.state = nextState;
-    console.log('set:', this.state);
     this.textInput.setState(this.state.inputValue);
     this.resultList.setState({
       movieList: this.state.movieList,

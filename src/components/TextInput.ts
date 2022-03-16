@@ -17,7 +17,6 @@ export default class TextInput {
     onBlur,
     onBtnClick,
   }: ITextInput) {
-    console.log('textInput');
     this.$target = $target;
     this.$element = document.createElement('div');
     this.$element.className = 'input--form';
