@@ -2,7 +2,7 @@ import { IResultList, IResultListState } from '../utils/interfaces/common.js';
 
 export default class ResultList {
   $target: Element;
-  $element: HTMLDivElement;
+  $element: HTMLElement;
   state: IResultListState;
   onKeyDownArrowUp: (nextId: number) => void;
   onKeyDownArrowDown: (nextId: number) => void;
@@ -14,7 +14,7 @@ export default class ResultList {
     onKeyDownArrowDown,
   }: IResultList) {
     this.$target = $target;
-    this.$element = document.createElement('div');
+    this.$element = document.createElement('section');
     this.$element.className = 'result--list';
     this.state = initialState;
     this.onKeyDownArrowUp = onKeyDownArrowUp;

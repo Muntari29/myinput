@@ -1,16 +1,19 @@
 class Header {
   $target: Element;
+  $element: HTMLElement;
   constructor({ $target }: any) {
     this.$target = $target;
+    this.$element = document.createElement('header');
     this.render();
   }
 
   template() {
-    return `<header class="header">autocomplete Input</header>`;
+    return `<h1 class="header">autocomplete Input</h1>`;
   }
 
   render() {
-    this.$target.innerHTML = this.template();
+    this.$element.innerHTML = this.template();
+    this.$target.appendChild(this.$element);
   }
 }
 
