@@ -11,6 +11,7 @@ export interface IState {
   inputValue: string;
   movieList: IItem[];
   isInputFocus: boolean;
+  selectedId: number;
 }
 
 export interface ITextInput extends ITarget {
@@ -24,8 +25,11 @@ export interface ITextInput extends ITarget {
 export interface IResultListState {
   movieList: IItem[];
   isInputFocus: boolean;
+  selectedId: number;
 }
 
 export interface IResultList extends ITarget {
   initialState: IResultListState;
+  onKeyDownArrowUp: (nextId: number) => void;
+  onKeyDownArrowDown: (nextId: number) => void;
 }

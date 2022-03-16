@@ -4,27 +4,41 @@ export default class ResultList {
   $target: Element;
   $element: HTMLDivElement;
   state: IResultListState;
+  onKeyDownArrowUp: (nextId: number) => void;
+  onKeyDownArrowDown: (nextId: number) => void;
 
-  constructor({ $target, initialState }: IResultList) {
+  constructor({
+    $target,
+    initialState,
+    onKeyDownArrowUp,
+    onKeyDownArrowDown,
+  }: IResultList) {
     console.log('ResList');
     this.$target = $target;
     this.$element = document.createElement('div');
     this.$element.className = 'result-list';
     this.state = initialState;
+    this.onKeyDownArrowUp = onKeyDownArrowUp;
+    this.onKeyDownArrowDown = onKeyDownArrowDown;
     this.render();
   }
 
   setState = (nextState: IResultListState) => {
     this.state = nextState;
-    console.log('here', this.state);
+    console.log('here', this.state.selectedId);
     this.render();
   };
 
   template() {
-    const { movieList } = this.state;
+    const { movieList, selectedId } = this.state;
     return `<ul class="list--ul" >
     ${movieList
-      .map((item) => `<li id="${item.id}" class="list--li">${item.text}</li>`)
+      .map(
+        (item, index) =>
+          `<li id="${item.id}" class="list--li ${
+            selectedId === index + 1 ? 'active' : ''
+          }"  >${item.text}</li>`
+      )
       .join('')}
   </ul>`;
   }
@@ -43,11 +57,17 @@ export default class ResultList {
   }
 
   handleKeydown = (e: KeyboardEvent) => {
-    e.stopPropagation();
-    if (e.key === 'ArrowUp') {
-      console.log('arrowup');
-    } else if (e.key === 'ArrowDown') {
-      console.log('ArrowDown');
+    const { selectedId } = this.state;
+    if (!e.isComposing) {
+      if (e.key === 'ArrowUp') {
+        console.log('arrowup');
+        const nextId = selectedId - 1;
+        this.onKeyDownArrowUp(nextId);
+      } else if (e.key === 'ArrowDown') {
+        console.log('ArrowDown');
+        const nextId = selectedId + 1;
+        this.onKeyDownArrowDown(nextId);
+      }
     }
   };
 

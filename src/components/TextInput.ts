@@ -31,7 +31,6 @@ export default class TextInput {
 
   setState = (nextState: string) => {
     this.state = nextState;
-    console.log(this.state, 55);
     const $input = this.$element.querySelector('input[name=movie]');
     if ($input) {
       ($input as HTMLInputElement).value = this.state;
@@ -56,13 +55,11 @@ export default class TextInput {
   }
 
   onInputHandler = async (e: Event) => {
-    console.log('oninputhandler');
     const inputValue = (e.target as HTMLInputElement).value;
     this.onChange(inputValue);
   };
 
   onClickXbtn = () => {
-    console.log('onChlickXbtn');
     this.onBtnClick();
   };
 

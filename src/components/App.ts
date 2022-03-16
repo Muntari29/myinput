@@ -14,6 +14,7 @@ export default class App {
     inputValue: '',
     movieList: [],
     isInputFocus: false,
+    selectedId: 0,
   };
 
   cache = Storage.getItem('movie', {});
@@ -26,7 +27,6 @@ export default class App {
       $target,
       initialState: this.state.inputValue,
       onChange: Debounce(async (movieTitle: string) => {
-        console.log('start', movieTitle);
         if (movieTitle.length > 0) {
           let movieData: string | null = null;
           if (this.cache[movieTitle]) {
@@ -50,14 +50,12 @@ export default class App {
         }
       }, 500),
       onFocus: () => {
-        console.log('focus');
         this.setState({
           ...this.state,
           isInputFocus: true,
         });
       },
       onBlur: () => {
-        console.log('blur');
         this.setState({
           ...this.state,
           isInputFocus: false,
@@ -77,6 +75,21 @@ export default class App {
       initialState: {
         movieList: this.state.movieList,
         isInputFocus: this.state.isInputFocus,
+        selectedId: this.state.selectedId,
+      },
+      onKeyDownArrowUp: (nextId: number) => {
+        console.log('onKeyDownArrowUp');
+        this.setState({
+          ...this.state,
+          selectedId: nextId < 0 ? this.state.movieList.length : nextId,
+        });
+      },
+      onKeyDownArrowDown: (nextId: number) => {
+        console.log('onKeyDownArrowDown');
+        this.setState({
+          ...this.state,
+          selectedId: nextId < this.state.movieList.length + 1 ? nextId : 0,
+        });
       },
     });
   }
@@ -88,17 +101,7 @@ export default class App {
     this.resultList.setState({
       movieList: this.state.movieList,
       isInputFocus: this.state.isInputFocus,
+      selectedId: this.state.selectedId,
     });
   }
-
-  // template() {
-  //   return `
-  //       <div></div>
-  //   `;
-  // }
-
-  // render() {
-  //   // this.$target.innerHTML = this.template();
-  //   this.setState('테스트');
-  // }
 }

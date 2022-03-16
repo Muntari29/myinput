@@ -97,3 +97,7 @@ main {
 .list--li:hover {
   background-color: #c1c1c1;
 }
+
+.list--li.active {
+  background-color: beige;
+}
