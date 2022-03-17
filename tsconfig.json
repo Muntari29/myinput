@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "cypress"],
   "compilerOptions": {
     "module": "esnext",
     "rootDir": "src",
@@ -8,6 +8,7 @@
     "target": "es6",
     "lib": ["ES2015", "ES6", "dom", "dom.iterable"],
     "sourceMap": true,
-    "types": ["cypress", "jasmine"]
+    "types": ["cypress", "node"],
+    "moduleResolution": "node"
   }
 }

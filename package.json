@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/Muntari29/myinput#readme",
   "devDependencies": {
-    "@types/jasmine": "^4.0.0",
     "@types/node": "^17.0.21",
     "cypress": "^9.5.2",
     "ts-node": "^10.7.0",
