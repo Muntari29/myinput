@@ -1,7 +1,4 @@
 /// <reference types="cypress" />
-
-import { type } from 'os';
-
 // @ts-check
 
 describe('Main Test', () => {
@@ -15,13 +12,84 @@ describe('Main Test', () => {
       cy.get('.form--btn').should('not.be.visible');
       cy.get('.result--list').should('not.exist');
     });
-    // 텍스트 입력 + 클릭 버튼 보이기
-    //   const text = '가';
-    //   cy.get('#input').type(text);
-    // });
-    // 텍스트 입력 후 클릭으로 값 지우기
-    // 텍스트 입력 후 리스트 컴포넌트 보이기
-    // 텍스트 입력 후 리스트 컴포넌트 보이기 + 위아래 아이템 선택 가능
+    it('User NotExist Value Input and KeyDown Test', () => {
+      const text = 'blablabla';
+      cy.get('#input').type(text);
+      cy.notExistValueApiCase1(text);
+      cy.get('.result--list').should('have.css', 'display', 'none');
+      cy.get('.list--li').should('not.exist');
+    });
+    context('KeyDown Arrow Down Test', () => {
+      it('User Value="가" Input and KeyDown Test', () => {
+        const text = '가';
+        cy.get('#input').type(text);
+        cy.get('.form--btn').should('be.visible');
+        cy.getApiCase1(text);
+        cy.get('.result--list').should('exist');
+        cy.get('.list--li').should('have.length', 4);
+        cy.get('body').type('{downArrow}');
+        cy.get('.list--li.active')
+          .should('have.css', 'background-color', 'rgb(193, 193, 193)')
+          .should('have.id', 1);
+        cy.get('body')
+          .type('{downArrow}')
+          .type('{downArrow}')
+          .type('{downArrow}')
+          .type('{downArrow}');
+        cy.get('.list--li.acive').should('not.exist');
+      });
+      it('User Value="나" Input and KeyDown Test', () => {
+        const text = '나';
+        cy.get('#input').type(text);
+        cy.get('.form--btn').should('be.visible');
+        cy.getApiCase2(text);
+        cy.get('.result--list').should('exist');
+        cy.get('.list--li').should('have.length', 3);
+        cy.get('body').type('{downArrow}');
+        cy.get('.list--li.active')
+          .should('have.css', 'background-color', 'rgb(193, 193, 193)')
+          .should('have.id', 5);
+        cy.get('body')
+          .type('{downArrow}')
+          .type('{downArrow}')
+          .type('{downArrow}');
+        cy.get('.list--li.acive').should('not.exist');
+      });
+    });
+    context('KeyDown Arrow Up Test', () => {
+      it('User Value="가" Input and KeyDown Test', () => {
+        const text = '가';
+        cy.get('#input').type(text);
+        cy.get('.form--btn').should('be.visible');
+        cy.getApiCase1(text);
+        cy.get('.result--list').should('exist');
+        cy.get('.list--li').should('have.length', 4);
+        cy.get('body').type('{upArrow}');
+        cy.get('.list--li.active')
+          .should('have.css', 'background-color', 'rgb(193, 193, 193)')
+          .should('have.id', 4);
+        cy.get('body')
+          .type('{upArrow}')
+          .type('{upArrow}')
+          .type('{upArrow}')
+          .type('{upArrow}');
+        cy.get('.list--li.acive').should('not.exist');
+      });
+      it('User Value="나" Input and KeyDown Test', () => {
+        const text = '나';
+        cy.get('#input').type(text);
+        cy.get('.form--btn').should('be.visible');
+        cy.getApiCase2(text);
+        cy.get('.result--list').should('exist');
+        cy.get('.list--li').should('have.length', 3);
+        cy.get('body').type('{upArrow}');
+        cy.get('.list--li.active')
+          .should('have.css', 'background-color', 'rgb(193, 193, 193)')
+          .should('have.id', 7);
+        cy.get('body').type('{upArrow}').type('{upArrow}').type('{upArrow}');
+        cy.get('.list--li.acive').should('not.exist');
+      });
+    });
   });
   // it('input value', () => {
   //   const text = '가';
