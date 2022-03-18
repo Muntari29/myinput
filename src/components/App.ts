@@ -59,6 +59,7 @@ export default class App {
         this.setState({
           ...this.state,
           isInputFocus: false,
+          selectedId: 0,
         });
       },
       onBtnClick: () => {
