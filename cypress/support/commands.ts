@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="../support" />
 // @ts-check
 
 Cypress.Commands.add('getApiCase1', (text: string) => {
