@@ -1,9 +1,12 @@
-import { IResultList, IResultListState } from '../utils/interfaces/common.js';
+import {
+  IAutoCompleteListState,
+  IAutoCompleteList,
+} from '../utils/interfaces/common.js';
 
-export default class ResultList {
+export default class AutoCompleteList {
   $target: Element;
   $element: HTMLElement;
-  state: IResultListState;
+  state: IAutoCompleteListState;
   onKeyDownArrowUp: (nextId: number) => void;
   onKeyDownArrowDown: (nextId: number) => void;
 
@@ -12,7 +15,7 @@ export default class ResultList {
     initialState,
     onKeyDownArrowUp,
     onKeyDownArrowDown,
-  }: IResultList) {
+  }: IAutoCompleteList) {
     this.$target = $target;
     this.$element = document.createElement('section');
     this.$element.className = 'result--list';
@@ -22,7 +25,7 @@ export default class ResultList {
     this.render();
   }
 
-  setState = (nextState: IResultListState) => {
+  setState = (nextState: IAutoCompleteListState) => {
     this.state = nextState;
     this.render();
   };
@@ -41,19 +44,7 @@ export default class ResultList {
   </ul>`;
   }
 
-  render() {
-    const { movieList, isInputFocus } = this.state;
-    this.$element.style.display = movieList.length > 0 ? 'block' : 'none';
-    if (isInputFocus) {
-      this.$element.innerHTML = this.template();
-      this.$target.appendChild(this.$element);
-    } else {
-      this.$element.remove();
-    }
-    this.mounte();
-  }
-
-  handleKeydown = (e: KeyboardEvent) => {
+  onKeyboardHandler = (e: KeyboardEvent) => {
     const { selectedId } = this.state;
     if (!e.isComposing) {
       if (e.key === 'ArrowUp') {
@@ -66,11 +57,23 @@ export default class ResultList {
     }
   };
 
+  render() {
+    const { movieList, isInputFocus } = this.state;
+    this.$element.style.display = movieList.length > 0 ? 'block' : 'none';
+    if (isInputFocus) {
+      this.$element.innerHTML = this.template();
+      this.$target.appendChild(this.$element);
+    } else {
+      this.$element.remove();
+    }
+    this.mounte();
+  }
+
   mounte() {
     const { movieList, isInputFocus } = this.state;
-    window.removeEventListener('keydown', this.handleKeydown);
+    window.removeEventListener('keydown', this.onKeyboardHandler);
     if (movieList.length > 0 && isInputFocus) {
-      window.addEventListener('keydown', this.handleKeydown);
+      window.addEventListener('keydown', this.onKeyboardHandler);
     }
   }
 }

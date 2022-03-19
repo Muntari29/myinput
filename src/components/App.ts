@@ -3,8 +3,8 @@ import Debounce from '../utils/Debounce.js';
 import { IMovieItem, IAppState, ITarget } from '../utils/interfaces/common.js';
 import Storage from '../utils/Storage.js';
 import Header from './Header.js';
-import ResultList from './ResultList.js';
-import TextInput from './TextInput.js';
+import ResultList from './AutoCompleteList.js';
+import TextInput from './UserInputForm.js';
 
 export default class App {
   $target: Element;
@@ -22,7 +22,6 @@ export default class App {
   constructor({ $target }: ITarget) {
     this.$target = $target;
     new Header({ $target });
-    //
     this.textInput = new TextInput({
       $target,
       initialState: this.state.inputValue,

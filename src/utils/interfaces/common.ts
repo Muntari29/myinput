@@ -14,7 +14,7 @@ export interface IAppState {
   selectedId: number;
 }
 
-export interface ITextInput extends ITarget {
+export interface IUserInputForm extends ITarget {
   initialState: string;
   onChange: (text: string) => void;
   onFocus: () => void;
@@ -22,14 +22,14 @@ export interface ITextInput extends ITarget {
   onBtnClick: () => void;
 }
 
-export interface IResultListState {
+export interface IAutoCompleteListState {
   movieList: IMovieItem[];
   isInputFocus: boolean;
   selectedId: number;
 }
 
-export interface IResultList extends ITarget {
-  initialState: IResultListState;
+export interface IAutoCompleteList extends ITarget {
+  initialState: IAutoCompleteListState;
   onKeyDownArrowUp: (nextId: number) => void;
   onKeyDownArrowDown: (nextId: number) => void;
 }

@@ -1,6 +1,6 @@
-import { ITextInput } from '../utils/interfaces/common.js';
+import { IUserInputForm } from '../utils/interfaces/common.js';
 
-export default class TextInput {
+export default class UserInputForm {
   $target: Element;
   $element: Element;
   state: string;
@@ -16,7 +16,7 @@ export default class TextInput {
     onFocus,
     onBlur,
     onBtnClick,
-  }: ITextInput) {
+  }: IUserInputForm) {
     this.$target = $target;
     this.$element = document.createElement('div');
     this.$element.className = 'input--form';
@@ -53,12 +53,12 @@ export default class TextInput {
   </form>`;
   }
 
-  onInputHandler = async (e: Event) => {
+  onChangeHandler = async (e: Event) => {
     const inputValue = (e.target as HTMLInputElement).value;
     this.onChange(inputValue);
   };
 
-  onClickXbtn = () => {
+  onBtnClickHandler = () => {
     this.onBtnClick();
   };
 
@@ -82,7 +82,7 @@ export default class TextInput {
     });
     this.$element
       .querySelector('input[name=movie]')
-      ?.addEventListener('input', this.onInputHandler);
+      ?.addEventListener('input', this.onChangeHandler);
 
     this.$element
       .querySelector('input[name=movie]')
@@ -94,6 +94,6 @@ export default class TextInput {
 
     this.$element
       .querySelector('.form--btn')
-      ?.addEventListener('click', this.onClickXbtn);
+      ?.addEventListener('click', this.onBtnClickHandler);
   }
 }
