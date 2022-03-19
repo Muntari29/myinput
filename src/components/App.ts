@@ -27,7 +27,7 @@ export default class App {
       $target,
       initialState: this.state.inputValue,
       onChange: Debounce(async (movieTitle: string) => {
-        if (movieTitle.length > 0) {
+        if (movieTitle.trim().length > 0) {
           let movieData: string | null = null;
           if (this.cache[movieTitle]) {
             movieData = this.cache[movieTitle];

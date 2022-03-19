@@ -94,9 +94,9 @@ body {
   padding: 12px;
 }
 
-.list--li:hover {
+/* .list--li:hover {
   background-color: #c1c1c1;
-}
+} */
 
 .list--li.active {
   background-color: #c1c1c1;
