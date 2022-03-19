@@ -1,4 +1,4 @@
-import { IMovieItem } from './interfaces/common';
+import { IMovieItem } from '../types/interfaces/common';
 
 const storage = window.sessionStorage;
 
@@ -8,7 +8,6 @@ export const getItem = (key: string, defaultValue: {}) => {
     if (storedValue) {
       return JSON.parse(storedValue);
     }
-
     return defaultValue;
   } catch {
     return defaultValue;

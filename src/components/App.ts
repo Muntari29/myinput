@@ -1,15 +1,15 @@
-import { request } from '../api/index.js';
+import { getAutoCompleteList } from '../api/index.js';
 import Debounce from '../utils/Debounce.js';
-import { IMovieItem, IAppState, ITarget } from '../utils/interfaces/common.js';
+import { IMovieItem, IAppState, ITarget } from '../types/interfaces/common.js';
 import Storage from '../utils/Storage.js';
 import Header from './Header.js';
-import ResultList from './AutoCompleteList.js';
-import TextInput from './UserInputForm.js';
+import AutoCompleteList from './AutoCompleteList.js';
+import UserInputForm from './UserInputForm.js';
 
 export default class App {
   $target: Element;
-  textInput: TextInput;
-  resultList: ResultList;
+  UserInputForm: UserInputForm;
+  AutoCompleteList: AutoCompleteList;
   state: IAppState = {
     inputValue: '',
     movieList: [],
@@ -22,7 +22,7 @@ export default class App {
   constructor({ $target }: ITarget) {
     this.$target = $target;
     new Header({ $target });
-    this.textInput = new TextInput({
+    this.UserInputForm = new UserInputForm({
       $target,
       initialState: this.state.inputValue,
       onChange: Debounce(async (movieTitle: string) => {
@@ -31,7 +31,7 @@ export default class App {
           if (this.cache[movieTitle]) {
             movieData = this.cache[movieTitle];
           } else {
-            movieData = await request(movieTitle);
+            movieData = await getAutoCompleteList(movieTitle);
             this.cache[movieTitle] = movieData;
             Storage.setItem('movie', this.cache);
           }
@@ -69,8 +69,7 @@ export default class App {
         });
       },
     });
-    //
-    this.resultList = new ResultList({
+    this.AutoCompleteList = new AutoCompleteList({
       $target,
       initialState: {
         movieList: this.state.movieList,
@@ -94,8 +93,8 @@ export default class App {
 
   setState(nextState: IAppState) {
     this.state = nextState;
-    this.textInput.setState(this.state.inputValue);
-    this.resultList.setState({
+    this.UserInputForm.setState(this.state.inputValue);
+    this.AutoCompleteList.setState({
       movieList: this.state.movieList,
       isInputFocus: this.state.isInputFocus,
       selectedId: this.state.selectedId,

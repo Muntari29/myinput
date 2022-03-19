@@ -20,9 +20,9 @@ body {
   font-size: 32px;
 }
 
-/* input Text Form Style */
+/* User Input Form Style */
 
-.input--form {
+.form--wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 32px;
@@ -70,7 +70,7 @@ body {
   cursor: pointer;
 }
 
-/* ResultList Style */
+/* AutoComplete Style */
 
 .result--list {
   width: 400px;
@@ -93,10 +93,6 @@ body {
 .list--li {
   padding: 12px;
 }
-
-/* .list--li:hover {
-  background-color: #c1c1c1;
-} */
 
 .list--li.active {
   background-color: #c1c1c1;

@@ -1,4 +1,4 @@
-import { IUserInputForm } from '../utils/interfaces/common.js';
+import { IUserInputForm } from '../types/interfaces/common.js';
 
 export default class UserInputForm {
   $target: Element;
@@ -19,7 +19,7 @@ export default class UserInputForm {
   }: IUserInputForm) {
     this.$target = $target;
     this.$element = document.createElement('div');
-    this.$element.className = 'input--form';
+    this.$element.className = 'form--wrapper';
     this.state = initialState;
     this.onChange = onChange;
     this.onFocus = onFocus;

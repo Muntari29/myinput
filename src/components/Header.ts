@@ -1,4 +1,4 @@
-import { ITarget } from '../utils/interfaces/common';
+import { ITarget } from '../types/interfaces/common';
 
 class Header {
   $target: Element;

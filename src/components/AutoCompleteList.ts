@@ -1,7 +1,7 @@
 import {
   IAutoCompleteListState,
   IAutoCompleteList,
-} from '../utils/interfaces/common.js';
+} from '../types/interfaces/common.js';
 
 export default class AutoCompleteList {
   $target: Element;
