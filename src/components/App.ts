@@ -88,6 +88,12 @@ export default class App {
           selectedId: nextId < this.state.movieList.length + 1 ? nextId : 0,
         });
       },
+      onMouseEvent: (currentId: number) => {
+        this.setState({
+          ...this.state,
+          selectedId: currentId,
+        });
+      },
     });
   }
 

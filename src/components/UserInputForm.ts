@@ -53,7 +53,7 @@ export default class UserInputForm {
   </form>`;
   }
 
-  onChangeHandler = async (e: Event) => {
+  onChangeHandler = (e: Event) => {
     const inputValue = (e.target as HTMLInputElement).value;
     this.onChange(inputValue);
   };

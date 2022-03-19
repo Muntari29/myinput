@@ -32,4 +32,5 @@ export interface IAutoCompleteList extends ITarget {
   initialState: IAutoCompleteListState;
   onKeyDownArrowUp: (nextId: number) => void;
   onKeyDownArrowDown: (nextId: number) => void;
+  onMouseEvent: (currentId: number) => void;
 }

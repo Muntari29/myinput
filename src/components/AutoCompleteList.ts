@@ -9,12 +9,14 @@ export default class AutoCompleteList {
   state: IAutoCompleteListState;
   onKeyDownArrowUp: (nextId: number) => void;
   onKeyDownArrowDown: (nextId: number) => void;
+  onMouseEvent: (currentId: number) => void;
 
   constructor({
     $target,
     initialState,
     onKeyDownArrowUp,
     onKeyDownArrowDown,
+    onMouseEvent,
   }: IAutoCompleteList) {
     this.$target = $target;
     this.$element = document.createElement('section');
@@ -22,6 +24,7 @@ export default class AutoCompleteList {
     this.state = initialState;
     this.onKeyDownArrowUp = onKeyDownArrowUp;
     this.onKeyDownArrowDown = onKeyDownArrowDown;
+    this.onMouseEvent = onMouseEvent;
     this.render();
   }
 
@@ -36,7 +39,7 @@ export default class AutoCompleteList {
     ${movieList
       .map(
         (item, index) =>
-          `<li id="${item.id}" class="list--li ${
+          `<li id="${index + 1}" class="list--li ${
             selectedId === index + 1 ? 'active' : ''
           }"  >${item.text}</li>`
       )
@@ -57,6 +60,18 @@ export default class AutoCompleteList {
     }
   };
 
+  onMouseMoveHandler = (e: MouseEvent) => {
+    const li = e.target as HTMLLIElement;
+    if (!li.className.includes('active')) {
+      const currentId = parseInt(li.id, 10);
+      this.onMouseEvent(currentId);
+    }
+  };
+
+  onMouseLeaveHandler = () => {
+    this.onMouseEvent(0);
+  };
+
   render() {
     const { movieList, isInputFocus } = this.state;
     this.$element.style.display = movieList.length > 0 ? 'block' : 'none';
@@ -74,6 +89,12 @@ export default class AutoCompleteList {
     window.removeEventListener('keydown', this.onKeyboardHandler);
     if (movieList.length > 0 && isInputFocus) {
       window.addEventListener('keydown', this.onKeyboardHandler);
+      this.$element.querySelectorAll('.list--li').forEach(($li) => {
+        $li.addEventListener('mousemove', this.onMouseMoveHandler);
+      });
+      this.$element
+        .querySelector('.list--ul')
+        .addEventListener('mouseleave', this.onMouseLeaveHandler);
     }
   }
 }
