@@ -3,7 +3,7 @@ import { ITextInput } from '../utils/interfaces/common.js';
 export default class TextInput {
   $target: Element;
   $element: Element;
-  state: string = '';
+  state: string;
   onChange: (inputValue: string) => void;
   onFocus: () => void;
   onBlur: () => void;

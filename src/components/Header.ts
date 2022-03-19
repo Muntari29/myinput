@@ -1,7 +1,9 @@
+import { ITarget } from '../utils/interfaces/common';
+
 class Header {
   $target: Element;
   $element: HTMLElement;
-  constructor({ $target }: any) {
+  constructor({ $target }: ITarget) {
     this.$target = $target;
     this.$element = document.createElement('header');
     this.render();

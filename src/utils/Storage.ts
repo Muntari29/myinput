@@ -1,4 +1,4 @@
-import { IItem } from './interfaces/common';
+import { IMovieItem } from './interfaces/common';
 
 const storage = window.sessionStorage;
 
@@ -15,7 +15,7 @@ export const getItem = (key: string, defaultValue: {}) => {
   }
 };
 
-export const setItem = (key: string, value: IItem[]) => {
+export const setItem = (key: string, value: IMovieItem[]) => {
   storage.setItem(key, JSON.stringify(value));
 };
 

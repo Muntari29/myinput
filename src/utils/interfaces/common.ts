@@ -2,14 +2,14 @@ export interface ITarget {
   $target: Element;
 }
 
-export interface IItem {
+export interface IMovieItem {
   text: string;
   id: number;
 }
 
-export interface IState {
+export interface IAppState {
   inputValue: string;
-  movieList: IItem[];
+  movieList: IMovieItem[];
   isInputFocus: boolean;
   selectedId: number;
 }
@@ -23,7 +23,7 @@ export interface ITextInput extends ITarget {
 }
 
 export interface IResultListState {
-  movieList: IItem[];
+  movieList: IMovieItem[];
   isInputFocus: boolean;
   selectedId: number;
 }

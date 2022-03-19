@@ -1,6 +1,6 @@
 import { request } from '../api/index.js';
 import Debounce from '../utils/Debounce.js';
-import { IState, ITarget } from '../utils/interfaces/common.js';
+import { IMovieItem, IAppState, ITarget } from '../utils/interfaces/common.js';
 import Storage from '../utils/Storage.js';
 import Header from './Header.js';
 import ResultList from './ResultList.js';
@@ -10,7 +10,7 @@ export default class App {
   $target: Element;
   textInput: TextInput;
   resultList: ResultList;
-  state: IState = {
+  state: IAppState = {
     inputValue: '',
     movieList: [],
     isInputFocus: false,
@@ -28,7 +28,7 @@ export default class App {
       initialState: this.state.inputValue,
       onChange: Debounce(async (movieTitle: string) => {
         if (movieTitle.trim().length > 0) {
-          let movieData: string | null = null;
+          let movieData: IMovieItem[] | null = null;
           if (this.cache[movieTitle]) {
             movieData = this.cache[movieTitle];
           } else {
@@ -93,7 +93,7 @@ export default class App {
     });
   }
 
-  setState(nextState: any) {
+  setState(nextState: IAppState) {
     this.state = nextState;
     this.textInput.setState(this.state.inputValue);
     this.resultList.setState({
