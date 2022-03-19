@@ -1,6 +1,24 @@
 # myinput
 input repo
 
+## Application 환경 & 실행
+Node Version
+- v16.10.0
+
+Application Build 
+
+`npm run build`
+
+Application Run 
+
+`npm run start`
+
+Application Test 
+
+`npm run e2e 
+or
+npm run e2e:open`
+
 
 ## 추가 구현 사항
 
