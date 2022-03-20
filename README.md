@@ -6,7 +6,7 @@
 Node Version
 - v16.10.0
 
-TypeScript Compiler
+Compiler
 - tsc
 
 HTML Serving
