@@ -19,7 +19,7 @@ export default class AutoCompleteList {
     onMouseEvent,
   }: IAutoCompleteList) {
     this.$target = $target;
-    this.$element = document.createElement('section');
+    this.$element = document.createElement('main');
     this.$element.className = 'result--list';
     this.state = initialState;
     this.onKeyDownArrowUp = onKeyDownArrowUp;

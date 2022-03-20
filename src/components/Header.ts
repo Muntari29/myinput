@@ -10,7 +10,7 @@ class Header {
   }
 
   template() {
-    return `<h1 class="header">autocomplete Input</h1>`;
+    return `<h1 class="header">AutoComplete Input</h1>`;
   }
 
   render() {
