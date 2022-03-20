@@ -1,4 +1,4 @@
-import { getAutoCompleteList } from '../api/index.js';
+import { getAutoCompleteList } from '../api/data.js';
 import Debounce from '../utils/Debounce.js';
 import { IMovieItem, IAppState, ITarget } from '../types/interfaces/common.js';
 import Storage from '../utils/Storage.js';

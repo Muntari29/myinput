@@ -101,3 +101,12 @@ body {
 .list--li.active {
   background-color: #c1c1c1;
 }
+
+@media (max-width: 425px) {
+  #app {
+    width: auto;
+  }
+  .result--list {
+    width: 332px;
+  }
+}

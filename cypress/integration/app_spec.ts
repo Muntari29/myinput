@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="../support" />
 // @ts-check
 
 describe('Main Test', () => {
@@ -69,7 +70,7 @@ describe('Main Test', () => {
         cy.getApiCase2(text);
         cy.get('.result--list').should('exist');
         cy.get('.list--li').should('have.length', 3);
-        cy.KeyDownEventCase2(5, false);
+        cy.KeyDownEventCase2(1, false);
       });
     });
     context('KeyDown Arrow Up Test', () => {
@@ -89,7 +90,23 @@ describe('Main Test', () => {
         cy.getApiCase2(text);
         cy.get('.result--list').should('exist');
         cy.get('.list--li').should('have.length', 3);
-        cy.KeyDownEventCase2(7, true);
+        cy.KeyDownEventCase2(3, true);
+      });
+    });
+    context('Mouse Event Test', () => {
+      it('Item MouseMove && MouseLeave Test', () => {
+        const text = '가';
+        cy.get('#input').type(text);
+        cy.get('.form--btn').should('be.visible');
+        cy.getApiCase1(text);
+        cy.get('.result--list').trigger('mousemove');
+        cy.get('.list--li.active').should(
+          'have.css',
+          'background-color',
+          'rgb(193, 193, 193)'
+        );
+        cy.get('.result--list').trigger('mouseleave');
+        cy.get('.list--li.active').should('not.exist');
       });
     });
   });
