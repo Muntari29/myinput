@@ -33,6 +33,8 @@ npm run e2e:open`
 
 `npm run build -> npm run start -> npm run e2e or npm run e2e:open`
 
+(로컬 서버를 실행한 상태에서 E2E 테스트가 가능합니다.)
+
 ![image](https://user-images.githubusercontent.com/65607601/159151522-3d619b37-6570-44f3-b6b0-ccd61fe56ae0.png)
 
 ## 추가 구현 사항
