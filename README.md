@@ -10,7 +10,7 @@ TypeScript Compiler
 - tsc
 
 HTML Serving
-- http-serve
+- http-server
 
 E2E Test
 - Cypress
