@@ -23,7 +23,7 @@ Application Build
 
 Application Run 
 
-`npm run start (Localhost port : 8080)`
+`npm run start`
 
 Application Test 
 
