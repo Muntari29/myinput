@@ -1,7 +1,7 @@
 ## Application 환경 
 
 <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> &emsp;
-<img alt="Cypress" src ="https://img.shields.io/badge/Cypress-17202C.svg?&style=for-the-badge&logo=Cypress&logoColor=white"/> &emsp;
+<img alt="Cypress" src ="https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"/> &emsp;
 
 Node Version
 - v16.10.0
