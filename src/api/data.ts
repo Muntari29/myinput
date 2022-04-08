@@ -1,7 +1,10 @@
+import { IMovieItem } from './../types/interfaces/common';
 export const API_END_POINT =
   'https://5qfov74y3c.execute-api.ap-northeast-2.amazonaws.com/web-front/';
 
-export const getAutoCompleteList = async (movieTitle: string) => {
+export const getAutoCompleteList = async (
+  movieTitle: string
+): Promise<IMovieItem[]> => {
   try {
     const res = await fetch(
       `${API_END_POINT}autocomplete?value=${movieTitle}`,
